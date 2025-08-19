@@ -28,6 +28,6 @@ while running:
     print(population[i].xPos, population[i].yPos)
     pygame.display.flip()
 
-    clock.tick(10)
+    clock.tick(60)
 
 pygame.quit()

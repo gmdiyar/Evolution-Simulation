@@ -1,15 +1,17 @@
 import random
 
+population = []
+
 
 class FirstGeneration:
 
     def __init__(self):
-        self.desireUp = random.randint(1, 10)
-        self.desireDown = random.randint(1, 10)
-        self.desireLeft = random.randint(1, 10)
-        self.desireRight = random.randint(1, 100)
+        self.desireUp = random.uniform(0, 1)
+        self.desireDown = random.uniform(0, 1)
+        self.desireLeft = random.uniform(0, 1)
+        self.desireRight = random.uniform(0, 1)
 
-        self.fecundity = random.randint(1, 100)
+        self.fecundity = random.uniform(0, 1)
 
         self.xPos = 400
         self.yPos = 300
@@ -31,14 +33,14 @@ class FirstGeneration:
         elif self.xPos < 50:
             self.xPos = 50
         else:
-            self.xPos += self.desireLeft - self.desireRight + random.randint(1, 10)
+            self.xPos += self.desireLeft - self.desireRight
 
         if self.yPos >= 550:
             self.yPos = 550
         elif self.yPos < 50:
             self.yPos = 50
         else:
-            self.yPos += self.desireDown - self.desireUp + random.randint(1, 10)
+            self.yPos += self.desireDown - self.desireUp
 
 
 class NextGeneration(FirstGeneration):
