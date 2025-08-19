@@ -4,12 +4,13 @@ from Main import *
 
 pygame.init()
 
-screen = pygame.display.set_mode((800, 600))
+SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+GUI = pygame.surface.Surface((100, 600))
 clock = pygame.time.Clock()
 running = True
 
 if __name__ == "__main__":
-    for i in range(15):
+    for i in range(300):
         first = FirstGeneration()
         population.append(first)
 
@@ -19,15 +20,22 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    screen.fill(white)
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            print(first.decideSurvivors(population))
+
+    SCREEN.fill(white)
+    GUI.fill(grey)
+
+    pygame.draw.rect(GUI, white, (15, 15, 70, 20), 0, 3, 3, 3, 3)
 
     for i in range(len(population)):
-        pygame.draw.rect(screen, black, (population[i].xPos, population[i].yPos, 5, 5))
+        pygame.draw.rect(SCREEN, black, (population[i].xPos, population[i].yPos, 5, 5))
         population[i].updatePos()
 
-    print(population[i].xPos, population[i].yPos)
-    pygame.display.flip()
+    # print(population[i].xPos, population[i].yPos)
 
-    clock.tick(60)
+    pygame.Surface.blit(SCREEN, GUI, (0, 0))
+    pygame.display.flip()
+    clock.tick(120)
 
 pygame.quit()

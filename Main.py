@@ -1,4 +1,5 @@
 import random
+from Const import *
 
 population = []
 
@@ -13,8 +14,8 @@ class FirstGeneration:
 
         self.fecundity = random.uniform(0, 1)
 
-        self.xPos = 400
-        self.yPos = 300
+        self.xPos = SCREEN_WIDTH / 2
+        self.yPos = SCREEN_HEIGHT / 2
 
     def printGenome(self):
         print(
@@ -28,19 +29,30 @@ class FirstGeneration:
         )
 
     def updatePos(self):
-        if self.xPos >= 750:
-            self.xPos = 750
-        elif self.xPos < 50:
-            self.xPos = 50
+        if self.xPos >= SCREEN_WIDTH - 5:
+            self.xPos = SCREEN_WIDTH - 5
+        elif self.xPos < 100:
+            self.xPos = 100
         else:
-            self.xPos += self.desireLeft - self.desireRight
+            self.xPos += self.desireRight - self.desireLeft
 
-        if self.yPos >= 550:
-            self.yPos = 550
-        elif self.yPos < 50:
-            self.yPos = 50
+        if self.yPos >= SCREEN_HEIGHT - 5:
+            self.yPos = SCREEN_HEIGHT - 5
+        elif self.yPos < 0:
+            self.yPos = 0
         else:
             self.yPos += self.desireDown - self.desireUp
+
+    def decideSurvivors(self, previousPopulation):
+        Survivors = []
+        for i in range(len(previousPopulation)):
+            if (
+                previousPopulation[i].xPos > survivingCoditionX
+                or previousPopulation[i].yPos > survivingCoditionY
+            ):
+                Survivors.append(previousPopulation[i])
+        population.clear()
+        population.extend(Survivors)
 
 
 class NextGeneration(FirstGeneration):
