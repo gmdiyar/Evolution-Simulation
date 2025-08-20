@@ -5,4 +5,4 @@ SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 
 survivingCoditionX = 500
-survivingCoditionY = 300
+survivingCoditionY = 600

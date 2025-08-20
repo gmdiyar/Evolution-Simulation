@@ -10,7 +10,7 @@ clock = pygame.time.Clock()
 running = True
 
 if __name__ == "__main__":
-    for i in range(300):
+    for i in range(30000):
         first = FirstGeneration()
         population.append(first)
 
@@ -22,6 +22,7 @@ while running:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             print(first.decideSurvivors(population))
+            first.reproduce(population)
 
     SCREEN.fill(white)
     GUI.fill(grey)

@@ -12,10 +12,14 @@ class FirstGeneration:
         self.desireLeft = random.uniform(0, 1)
         self.desireRight = random.uniform(0, 1)
 
-        self.fecundity = random.uniform(0, 1)
-
         self.xPos = SCREEN_WIDTH / 2
         self.yPos = SCREEN_HEIGHT / 2
+
+    def setNewGenome(self, desireUp, desireDown, desireLeft, desireRight):
+        self.desireUp = desireUp
+        self.desireDown = desireDown
+        self.desireLeft = desireLeft
+        self.desireRight = desireRight
 
     def printGenome(self):
         print(
@@ -54,14 +58,15 @@ class FirstGeneration:
         population.clear()
         population.extend(Survivors)
 
-
-class NextGeneration(FirstGeneration):
-
-    def __init__(self):
-        super().__init__()
-        self.desireUp = (self.desireUp + random.randint(-100, 100)) % 100
-        self.desireDown = (self.desireDown + random.randint(-100, 100)) % 100
-        self.desireLeft = (self.desireLeft + random.randint(-100, 100)) % 100
-        self.desireRight = (self.desireRight + random.randint(-100, 100)) % 100
-
-        self.fecundity = random.randint(-100, 100)
+    def reproduce(self, population):
+        for i in range(len(population)):
+            population[i].setNewGenome(
+                random.choice(population).desireUp
+                + (random.choice(population).desireUp) * random.uniform(0, 1),
+                random.choice(population).desireDown
+                + (random.choice(population).desireDown) * random.uniform(0, 1),
+                random.choice(population).desireLeft
+                + (random.choice(population).desireLeft) * random.uniform(0, 1),
+                random.choice(population).desireRight
+                + (random.choice(population).desireRight) * random.uniform(0, 1),
+            )
